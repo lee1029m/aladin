@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="lib/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function () {
+            /* .Sign */
+            $('.hd_top .in').click(function () {
+                $('.Sign.in').addClass('active')
+            })
+            $('.btn').click(function () {
+                $('.Sign.in').removeClass('active')
+            })
+            $('.hd_top .up').click(function () {
+                $('.Sign.up').addClass('active')
+            })
+            $('.btn').click(function () {
+                $('.Sign.up').removeClass('active')
+            })
+
+            $('.Sign_bar ul li').mouseenter(function () {
+                console.log($(this).position().left)
+                let move = $(this).position().left
+
+                $('.bar').stop().animate({
+                    'left': move
+                })
+            })
+
+            $('.menu').click(function () {
+                $('.pc').slideToggle()
+            })
+
+            /* $('.gnb > li').mouseover(function(){
+                $(this).find('.depth02').stop().slideDown(500)
+            }).mouseout(function(){
+                $(this).find('.depth02').stop().slideUp(500)
+            }) */
+
+            /* .main_visual */
+            var swiper = new Swiper(".main_visual .mySwiper", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+
+            let tabMenu = $('.tab li')
+            let tablist = $('.Book_tab .list')
+
+            tabMenu.click(function () {
+                tabMenu.removeClass('on');
+                $(this).addClass('on');
+
+                tablist.removeClass('on');
+                tablist.eq($(this).index()).addClass('on');
+            });
+        })
+
+        window.onload = function () {
+            let prev = document.querySelector('.prev')
+            let next = document.querySelector('.next')
+
+            let listAll = document.querySelectorAll('.Best .list')/* All )모든 list 선택 */
+            let i = 0
+
+            next.onclick = function () {
+                i++
+                console.log(i)
+
+                if (i >= listAll.length) {
+                    i = 0
+                }
+                listEach()
+            }
+
+            function listEach() {
+                listAll.forEach(function (item) {
+                    item.classList.remove('on')
+                })
+                listAll[i].classList.add('on')
+            }
+            prev.onclick = function () {
+                i--
+                console.log(i)
+                if (i <= 0) {
+                    i = 0
+                }
+                listEach()
+
+            }
+
+            setInterval(function () {
+                $('.slide:first').fadeOut(1500).next().fadeIn(1500)
+                $('.slide:first').appendTo('.slide_wrap')
+            }, 3000)
+
+            $('.left li:first').click(function () {
+                $('.modal').addClass('active')
+            })
+            $('.btn').click(function () {
+                $('.modal').removeClass('active')
+            })
+
+
+            /* 😀 */
+            /* $('.mobile .depth01 > a').click(function(){
+                if($(this).siblings().css('display') == 'none'){
+                    $('.mobile .depth02').slideUp()
+                    $(this).siblings().slideDown()
+
+                    $('.mobile .depth01 > a').css({
+                        'color' : '#333'
+                    }) 
+                    $(this).css({
+                        'color' : '#fff'
+                    })
+                } else {
+                    $(this).siblings().slideUp()
+
+                    $(this).css({
+                        'color' : '#333'
+                    })
+                }
+            })
+
+            $('.menu_close').click(function(){
+                $('.mobile_gnb').animate({
+                    'right' : '-100%'
+                })
+            })
+            $('.menu_open').click(function(){
+                $('.mobile_gnb').animate({
+                    'right' :'0'
+                })
+            }) */
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="Sign in">
+        <div class="popup">
+            <h1>Sign in</h1>
+            <div class="box">
+                <label for="id">아이디</label>
+                <input type="text" id="id" placeholder="아이디">
+            </div>
+
+            <div class="box">
+                <label for="pass">비밀번호</label>
+                <input type="password" id="pass" placeholder="비밀번호">
+            </div>
+            <ul>
+                <li><a href="#">아이디 찾기</a></li>
+                <li><a href="#">비밀번호 찾기</a></li>
+            </ul>
+            <a href="#">Sign in</a>
+            <button class="btn"><a href="#"><img src="img/icons/icons8-닫기-64.png" alt=""></a></button>
+        </div><!-- .popup end -->
+    </div><!-- .Sign_in end -->
+
+    <div class="Sign up">
+        <div class="popup">
+            <h1>Sign up</h1>
+            <div class="box">
+                <label for="name">이름</label>
+                <input type="text" id="name" placeholder="이름을 입력해주세요.">
+            </div>
+
+            <div class="box">
+                <label for="pass">비밀번호</label>
+                <input type="password" id="pass" placeholder="비밀번호 입력해주세요.">
+            </div>
+            <div class="box">
+                <label for="">주소</label>
+                <input type="button" value="주소찾기" />
+                <input type="text" placeholder="주소 입력해주세요.">
+            </div>
+            <div class="box">
+                <label for="">개인정보 유효기간</label>
+                <input type="radio" id="web1" name="web" value="html" checked>
+                <label for="web1">1년</label>
+
+                <input type="radio" id="web2" name="web" value="css">
+                <label for="web2">3년</label>
+
+                <input type="radio" id="web3" name="web" value="js">
+                <label for="web3">5년</label>
+
+                <input type="radio" id="web3" name="web" value="js">
+                <label for="web3">탈퇴 시</label>
+
+            </div>
+            <a href="#">Sign in</a>
+            <button class="btn"><a href="#"><img src="img/icons/icons8-닫기-64.png" alt=""></a></button>
+        </div><!-- .popup end -->
+    </div><!-- .Sign_up end -->
+
+    <div id="wrap">
+        <header>
+            <div class="inner">
+                <div class="hd_top">
+                    <h1>
+                        <a href="#"><img src="img/aladin_logo.png" alt=""></a>
+                    </h1>
+                    <div class="Sign_bar">
+                        <ul>
+                            <li class="in"><a href="#">Sign in</a></li>
+                            <li class="up"><a href="#">Sign up</a></li>
+                        </ul><!-- .hd_top end -->
+                        <div class="bar">
+                            <span>바</span>
+                        </div><!-- .bar end -->
+                    </div>
+                </div><!-- .hd_top end -->
+                <div class="hd_buttom">
+                    <div class="menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div><!-- menu end -->
+
+                    <div class="search_box">
+                        <input type="text" placeholder="검색어를 입력해주세요.">
+                        <button><img src="img/icons/icons8-수색-48 2.png" alt=""></button>
+                    </div><!-- .search_box end -->
+
+                    <ul>
+                        <li><a href="#"><img src="img/icons/icons8-사용자-48 (1).png" alt=""></a></li>
+                        <li><a href="#"><img src="img/icons/icons8-가방-64 (1).png" alt=""></a></li>
+                    </ul>
+                </div><!-- .hd_buttom end -->
+
+                <nav class="pc">
+                    <ul class="gnb">
+                        <li class="depth01">
+                            <a href="#">국내도서</a>
+                            <ul class="depth02">
+                                <li><a href="#">소설</a></li>
+                                <li><a href="#">시/에세이</a></li>
+                                <li><a href="#">인문</a></li>
+                                <li><a href="#">가정/육아</a></li>
+                                <li><a href="#">요리</a></li>
+                                <li><a href="#">건강</a></li>
+                                <li><a href="#">취미/실용/스포츠</a></li>
+                                <li><a href="#">경제/경영</a></li>
+                                <li><a href="#">자기계발</a></li>
+                                <li><a href="#">정치/사회</a></li>
+                                <li><a href="#">역사/문화</a></li>
+                                <li><a href="#">종교</a></li>
+                                <li><a href="#">예술/대중문화</a></li>
+                                <li><a href="#">외국어</a></li>
+                                <li><a href="#">취업/수험서</a></li>
+                                <li><a href="#">여행</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">외국도서</a>
+                            <ul class="depth02">
+                                <li><a href="#">문학</a></li>
+                                <li><a href="#">취미/실용/여행</a></li>
+                                <li><a href="#">생활/요리/건강</a></li>
+                                <li><a href="#">예술/건축</a></li>
+                                <li><a href="#">인문/사회</a></li>
+                                <li><a href="#">경제/경영</a></li>
+                                <li><a href="#">과학/기술</a></li>
+                                <li><a href="#">어린이</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">eBook</a>
+                            <ul class="depth02">
+                                <li><a href="#">경제경영</a></li>
+                                <li><a href="#">자기계발</a></li>
+                                <li><a href="#">시/에세이</a></li>
+                                <li><a href="#">인문</a></li>
+                                <li><a href="#">종교</a></li>
+                                <li><a href="#">소설</a></li>
+                                <li><a href="#">국어/외국어</a></li>
+                                <li><a href="#">정치/사회</a></li>
+                                <li><a href="#">역사/문화</a></li>
+                                <li><a href="#">과학/공학</a></li>
+                                <li><a href="#">종교</a></li>
+                                <li><a href="#">예술/대중문화</a></li>
+                                <li><a href="#">외국어</a></li>
+                                <li><a href="#">여행</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">온라인중고</a>
+                            <ul class="depth02">
+                                <li><a href="#">경제경영</a></li>
+                                <li><a href="#">만화</a></li>
+                                <li><a href="#">사회과학</a></li>
+                                <li><a href="#">소설/시/희곡</a></li>
+                                <li><a href="#">어린이</a></li>
+                                <li><a href="#">에세이</a></li>
+                                <li><a href="#">인문학</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">알라딘 굿즈</a>
+                            <ul class="depth02">
+                                <li><a href="#">가방,파우치</a></li>
+                                <li><a href="#">데스크용품</a></li>
+                                <li><a href="#">독서용품</a></li>
+                                <li><a href="#">디지털</a></li>
+                                <li><a href="#">문구</a></li>
+                                <li><a href="#">생활용품</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">음반</a>
+                            <ul class="depth02">
+                                <li><a href="#">가요</a></li>
+                                <li><a href="#">국악</a></li>
+                                <li><a href="#">월드뮤직</a></li>
+                                <li><a href="#">재즈</a></li>
+                                <li><a href="#">종교/명상/기타</a></li>
+                                <li><a href="#">클래식</a></li>
+                                <li><a href="#">팝</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- depth01 end -->
+                    </ul><!-- .gnb -->
+                </nav><!-- .pc end-->
+                
+
+                <nav class="mobile mobile_gnb">
+
+                    <div class="menu_close">
+                        <span></span>
+                        <span></span>
+                    </div><!-- .menu_close -->
+
+                    <ul class="gnb">
+                        <li class="depth01">
+                            <a href="#">국내도서</a>
+                            <ul class="depth02">
+                                <li><a href="#">소설</a></li>
+                                <li><a href="#">시/에세이</a></li>
+                                <li><a href="#">인문</a></li>
+                                <li><a href="#">가정/육아</a></li>
+                                <li><a href="#">요리</a></li>
+                                <li><a href="#">건강</a></li>
+                                <li><a href="#">취미/실용/스포츠</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">외국도서</a>
+                            <ul class="depth02">
+                                <li><a href="#">문학</a></li>
+                                <li><a href="#">취미/실용/여행</a></li>
+                                <li><a href="#">생활/요리/건강</a></li>
+                                <li><a href="#">예술/건축</a></li>
+                                <li><a href="#">인문/사회</a></li>
+                                <li><a href="#">경제/경영</a></li>
+                                <li><a href="#">과학/기술</a></li>
+                                <li><a href="#">어린이</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">eBook</a>
+                            <ul class="depth02">
+                                <li><a href="#">경제경영</a></li>
+                                <li><a href="#">자기계발</a></li>
+                                <li><a href="#">시/에세이</a></li>
+                                <li><a href="#">인문</a></li>
+                                <li><a href="#">종교</a></li>
+                                <li><a href="#">소설</a></li>
+                                <li><a href="#">국어/외국어</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">온라인중고</a>
+                            <ul class="depth02">
+                                <li><a href="#">경제경영</a></li>
+                                <li><a href="#">만화</a></li>
+                                <li><a href="#">사회과학</a></li>
+                                <li><a href="#">소설/시/희곡</a></li>
+                                <li><a href="#">어린이</a></li>
+                                <li><a href="#">에세이</a></li>
+                                <li><a href="#">인문학</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">알라딘 굿즈</a>
+                            <ul class="depth02">
+                                <li><a href="#">가방,파우치</a></li>
+                                <li><a href="#">데스크용품</a></li>
+                                <li><a href="#">독서용품</a></li>
+                                <li><a href="#">디지털</a></li>
+                                <li><a href="#">문구</a></li>
+                                <li><a href="#">생활용품</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">음반</a>
+                            <ul class="depth02">
+                                <li><a href="#">가요</a></li>
+                                <li><a href="#">국악</a></li>
+                                <li><a href="#">월드뮤직</a></li>
+                                <li><a href="#">재즈</a></li>
+                                <li><a href="#">종교/명상/기타</a></li>
+                                <li><a href="#">클래식</a></li>
+                                <li><a href="#">팝</a></li>
+                            </ul><!-- .depth02 end -->
+                        </li><!-- depth01 end -->
+                    </ul><!-- .gnb -->
+                </nav><!-- .mobile mobile_gnb end -->
+            </div><!-- .inner end -->
+        </header>
+
+        <main>
+            <section class="main_visual">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div>
+                                <h2>도시와 그 불확실한 벽</h2>
+                                <p>"무라카미 하루키 최신작"</p>
+                                <a href="#">See All ></a>
+                            </div>
+                            <img src="img/BG.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <h2>딸이 조용히 무너져 있었다</h2>
+                                <span>의사 엄마가 기록한 정신질환자의 가족으로 살아가는 법</span>
+                                <p>"정신질환자의 가족으로 사는 일"</p>
+                            </div>
+                            <img src="img/BG2.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <h2>일론 머스크</h2>
+                                <p>“미래는 꿈꾸는 것이 아니라 만드는 것,<br>
+                                    그가 상상하면 모두 현실이 된다!”</p>
+                            </div>
+                            <img src="img/BG1.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <div>
+                                <h2>테디베어는 죽지 않아</h2>
+                                <p>"조예은 작가의 호러 청춘 로맨스!"</p>
+                            </div>
+                            <img src="img/BG3.png" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section><!-- .main_visual end -->
+        </main>
+        <!-- 😀 -->
+        <section class="New_Book">
+            <div class="inner">
+                <div class="title">
+                    <h3>New Book</h3>
+                    <a href="#">See All ></a>
+                </div><!-- title end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더/1.png" alt="">
+                            <div class="box_top">
+                                <h4>한국의 근현대건축</h4>
+                                <p>정인하 (지은이)</p>
+                                <strong>45,000원 →<span>42,750원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더/2.png" alt="">
+                            <div class="box_top">
+                                <h4>이토록 다정한 그림책</h4>
+                                <p>이상희,최현미,한미화,김지은 (지은이)</p>
+                                <strong>27,500원 →<span>24,750원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더/3.png" alt="">
+                            <div class="box_top">
+                                <h4>책 읽는 책 쓰는 책 만드는</h4>
+                                <p>이하영 (지은이)</p>
+                                <strong>15,000원 →<span>13,500원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더/4.png" alt="">
+                            <div class="box_top">
+                                <h4>그림책 만들기 트레이닝</h4>
+                                <p>하세가와 슈헤이 (지은이)</p>
+                                <strong>17,000원 →<span>15,300원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더/5.png" alt="">
+                            <div class="box_top">
+                                <h4>백룸</h4>
+                                <p>이선희,천희란 (지은이)</p>
+                                <strong>17,600원 →<span>15,840원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .New_Book end -->
+
+        <section class="Popular">
+            <div class="inner">
+                <div class="title">
+                    <img src="img/새 폴더 (3)/8936479415_1.jpg" alt="">
+                    <a href="#">Popular Book</a>
+                </div><!-- .title end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (3)/k042935982_1.jpg" alt="">
+                            <div class="box_top">
+                                <h4>6시 20분의 남자</h4>
+                            </div>
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (3)/k092935672_2.jpg" alt="">
+                            <div class="box_top">
+                                <h4>마시지 않을 수 없는 밤이니까요</h4>
+                            </div>
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (3)/8932042101_1.jpg" alt="">
+                            <div class="box_top">
+                                <h4>촉진하는 밤</h4>
+                            </div>
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .Popular end -->
+
+        <section class="Best">
+            <div class="inner">
+                <div class="title">
+                    <h3>Best Sellers</h3>
+                    <div class="btn">
+                        <button class="prev"><img src="img/icons/icons8-화살-48 (1) 1.png" alt=""></button>
+                        <button class="next"><img src="img/icons/icons8-화살-48 1.png" alt=""></button>
+                    </div><!-- .btn end -->
+                </div><!-- .title end -->
+                <div class="list on">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/6.png" alt="">
+                            <div class="box_top">
+                                <h4>도시와 그 불확실한 벽</h4>
+                                <p>무라카미 하루키(지은이)</p>
+                                <strong>19,500원 →<span>17,550원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/7.png" alt="">
+                            <div class="box_top">
+                                <h4>푸바오, 매일매일 행복해</h4>
+                                <p>강철원(에버랜드 동물원)</p>
+                                <strong>20,000원 →<span>18,000원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/8.png" alt="">
+                            <div class="box_top">
+                                <h4>디케의 눈물</h4>
+                                <p>조국 (지은이)</p>
+                                <strong>18,800원 →<span>16,920원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/9.png" alt="">
+                            <div class="box_top">
+                                <h4>퓨처 셀프</h4>
+                                <p>벤저민 하디 (지은이)</p>
+                                <strong>19,800원 →<span>17,820원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/10.png" alt="">
+                            <div class="box_top">
+                                <h4>세이노의 가르침</h4>
+                                <p>세이노(SayNo) (지은이)</p>
+                                <strong>7,200원 →<span>6,480원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/11.png" alt="">
+                            <div class="box_top">
+                                <h4>모든 멋진 일에는 두려움이 따른다 </h4>
+                                <p>이연 (지은이)</p>
+                                <strong>16,800원 →<span>15,120원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/12.png" alt="">
+                            <div class="box_top">
+                                <h4>도둑맞은 집중력</h4>
+                                <p>요한 하리 (지은이),김하현 (옮긴이)</p>
+                                <strong>18,800원 →<span>16,920원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/13.png" alt="">
+                            <div class="box_top">
+                                <h4>익명의 독서 중독자들</h4>
+                                <p>이창현 (지은이),유희 (그림)</p>
+                                <strong>19,800원 →<span>17,820원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/14.png" alt="">
+                            <div class="box_top">
+                                <h4>문과 남자의 과학 공부</h4>
+                                <p>유시민 (지은이)</p>
+                                <strong>17,500원 →<span>15,750원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/15.png" alt="">
+                            <div class="box_top">
+                                <h4>가짜 노동 </h4>
+                                <p>데니스 뇌르마르크,아네르스 포그 옌센 (지은이),이수영 (옮긴이)</p>
+                                <strong>16,800원 →<span>15,120원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/16.png" alt="">
+                            <div class="box_top">
+                                <h4>익명의 독서 중독자들 2</h4>
+                                <p>이창현 (지은이),유희 (그림)</p>
+                                <strong>16,800원 →<span>15,120원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/17.png" alt="">
+                            <div class="box_top">
+                                <h4>1%를 읽는 힘</h4>
+                                <p>메르 (지은이)</p>
+                                <strong>22,000원 →<span>19,800원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/18.png" alt="">
+                            <div class="box_top">
+                                <h4>최소한의 한국사</h4>
+                                <p>최태성 (지은이)</p>
+                                <strong>18,000원 →<span>16,200원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/19.png" alt="">
+                            <div class="box_top">
+                                <h4>멘탈을 회복하는 연습</h4>
+                                <p>데이먼 자하리아데스 (지은이),안솔비 (옮긴이)</p>
+                                <strong>16,800원 →<span>15,120원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (2)/20.png" alt="">
+                            <div class="box_top">
+                                <h4>최민준의 아들코칭 백과 </h4>
+                                <p>최민준 (지은이)</p>
+                                <strong>18,800원 →<span>16,920원</span></strong>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .Best end -->
+
+        <div class="text_slide">
+            <p>당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                    <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지<페이지보이>
+                        북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                            <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지<페이지보이>
+                                북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                                    <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지<페이지보이>
+                                        북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                                            <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지<페이지보이>
+                                                북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                                                    <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지<페이지보이>
+                                                        북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                                                            <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지<페이지보이>
+                                                                북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                                                                    <img src="img/aladin_logo.png" alt="">배우 엘리엇 페이지
+                                                                    <페이지보이>
+                                                                        북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학 산책>
+                                                                            <img src="img/aladin_logo.png" alt="">배우 엘리엇
+                                                                            페이지<페이지보이>
+                                                                                북펀드 당신의 지적 허기를 채워줄 자본주의 인문서! <자본주의 인문학
+                                                                                    산책>
+                                                                                    <img src="img/aladin_logo.png"
+                                                                                        alt="">배우 엘리엇 페이지<페이지보이>
+                                                                                        북펀드 당신의 지적 허기를 채워줄 자본주의 인문서!
+                                                                                        <자본주의 인문학 산책>
+                                                                                            <img src="img/aladin_logo.png"
+                                                                                                alt="">
+            </p>
+        </div><!-- .text_slide end -->
+
+        <section class="Book_tab">
+            <div class="inner">
+                <div class="title">
+                    <h3>Book</h3>
+                    <ul class="tab">
+                        <li class="on">추천도서</li>
+                        <li>국내도서</li>
+                        <li>외국도서</li>
+                        <li>eBook</li>
+                        <li>온라인 중고</li>
+                    </ul><!-- .tab end -->
+                </div><!-- .title end -->
+                <div class="list on">
+                    <div class="item">
+                        <a href="#">
+                            <span>1</span>
+                            <img src="img/새 폴더 (4)/22.png" alt="">
+                            <div class="box_top">
+                                <h4>거인의 노트</h4>
+                                <p>김익한 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <span>2</span>
+                            <img src="img/새 폴더 (4)/23.png" alt="">
+                            <div class="box_top">
+                                <h4>아주 희미한 빛으로도</h4>
+                                <p>최은영 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <span>3</span>
+                            <img src="img/새 폴더 (4)/24.png" alt="">
+                            <div class="box_top">
+                                <h4>1%를 읽는 힘</h4>
+                                <p>메르 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <span>4</span>
+                            <img src="img/새 폴더 (4)/9.png" alt="">
+                            <div class="box_top">
+                                <h4>퓨처 셀프</h4>
+                                <p>벤저민 하디 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/26.png" alt="">
+                            <div class="box_top">
+                                <h4>세이노의 가르침 </h4>
+                                <p>세이노(SayNo) (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/27.png" alt="">
+                            <div class="box_top">
+                                <h4>청소년을 위한 우리말 속뜻 논어</h4>
+                                <p>전광진 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/28.png" alt="">
+                            <div class="box_top">
+                                <h4>피렌체 사람들 이야기</h4>
+                                <p>폴 스트래던 (지은이),이종인 (옮긴이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/29.png" alt="">
+                            <div class="box_top">
+                                <h4>한밤의 시간표</h4>
+                                <p>정보라 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/1.png" alt="">
+                            <div class="box_top">
+                                <h4>Breadsong : How Baking Changed Our Lives (Hardcover)</h4>
+                                <p>Kitty Tait,키티 테이트,앨 테이트 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/2.png" alt="">
+                            <div class="box_top">
+                                <h4>Diary of a Wimpy Kid #2 : Rodrick Rules (Paperback, International Edition) </h4>
+                                <p>제프 키니 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/3.png" alt="">
+                            <div class="box_top">
+                                <h4>なかよし 2023年 10月號【雜誌】</h4>
+                                <p>講談社</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/4.png" alt="">
+                            <div class="box_top">
+                                <h4>The 169-Storey Treehouse : Monkeys, Mirrors, Mayhem! (Paperback) </h4>
+                                <p>Andy Griffiths (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/10.png" alt="">
+                            <div class="box_top">
+                                <h4>물고기는 존재하지 않는다</h4>
+                                <p>룰루 밀러 (지은이),정지인 (옮긴이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/11.png" alt="">
+                            <div class="box_top">
+                                <h4>메시지 S 스탠더드 에디션</h4>
+                                <p>유진 피터슨 (지은이),김순현,윤종석,이종태,홍종락 (옮긴이),김회권,김영봉 (감수)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/25.png" alt="">
+                            <div class="box_top">
+                                <h4>데미안 (오리지널 초판본 표지디자인)</h4>
+                                <p>헤르만 헤세 (지은이),이미영 (옮긴이),김선형 (해설)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/30.png" alt="">
+                            <div class="box_top">
+                                <h4>리지웨이의 한국전쟁</h4>
+                                <p>매슈 B. 리지웨이 (지은이),박권영 (옮긴이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+                
+                <div class="list">
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/5.png" alt="">
+                            <div class="box_top">
+                                <h4>복잡계 세상에서의 투자</h4>
+                                <p>오종태 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/6.png" alt="">
+                            <div class="box_top">
+                                <h4>부의 본능</h4>
+                                <p>우석(브라운스톤) (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/7.png" alt="">
+                            <div class="box_top">
+                                <h4>우리말 어감 사전</h4>
+                                <p>안상순 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                    <div class="item">
+                        <a href="#">
+                            <img src="img/새 폴더 (4)/8.png" alt="">
+                            <div class="box_top">
+                                <h4>나 혼자서도 한다! 잘 팔리는 상세페이지 셀프 제작법</h4>
+                                <p>서형윤 (지은이)</p>
+                            </div>
+
+                            <div class="box_buttom">
+                                <div>
+                                    <img src="img/icons/icons8-쇼핑-카트-64.png" alt="">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                                <a href="#"><img src="img/icons/icons8-하트-48 6.png" alt=""></a>
+                            </div>
+                        </a>
+                    </div><!-- .item end -->
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .Book_tab -->
+
+        <section class="banner">
+            <div class="slide_wrap">
+                <div class="slide">
+                    <img src="img/BG_1.png" alt="">
+                    <div class="text">
+                        <h4>테디베어는 죽지 않아</h4>
+                        <p>조예은 작가의 호러 청춘 로맨스!</p>
+                    </div><!-- .text end -->
+                </div><!-- .slide end -->
+                <div class="slide">
+                    <img src="img/BG_2.png" alt="">
+                    <div class="text">
+                        <h4>푸바오, 매일매일 행복해</h4>
+                        <p>장난꾸러기 푸바오의 일상 포토 에세이</p>
+                    </div><!-- .text end -->
+                </div><!-- .slide end -->
+                <div class="slide">
+                    <img src="img/BG_3.png" alt="">
+                    <div class="text">
+                        <h4>달러구트 꿈 백화점</h4>
+                        <p>주문하신 꿈은 매진입니다</p>
+                    </div><!-- .text end -->
+                </div><!-- .slide end -->
+            </div><!-- .slide_wrap end -->
+        </section><!-- .banner end -->
+
+        <section class="YouTube">
+            <div class="inner">
+                <div class="title">
+                    <div>
+                        <h3>YouTube</h3>
+                        <p>알라디너TV</p>
+                    </div>
+                    <a href="#">See All ></a>
+                </div><!-- .title end -->
+                <div class="list">
+                    <div>
+                        <iframe width="424" height="238" src="https://www.youtube.com/embed/aDtnl7ZMMAc"
+                            title="[라이브북토크] ‘환승인간‘ 한정현 X 정지혜" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div>
+                        <iframe width="716" height="403" src="https://www.youtube.com/embed/t4gtD4ysEDc"
+                            title="[라이브북토크] ‘말 없는 자들의 목소리‘ 황모과 X 한정현" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div>
+                        <iframe width="716" height="403" src="https://www.youtube.com/embed/Je0FB-mwbR8"
+                            title="[라이브북토크] ‘홍수는 내 영혼에 이르고‘ 황인찬 시인 X 김현경 역자" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .YouTube end -->
+
+        <section class="Goods">
+            <div class="inner">
+                <div class="title">
+                    <h3>Goods</h3>
+                </div><!-- .title end -->
+                <div class="list">
+                    <div class="item">
+                        <img src="img/goods1.jpg" alt="">
+                        <a href="#">
+                            <p>MORE →</p>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <img src="img/goods2.jpg" alt="">
+                        <a href="#">
+                            <p>MORE →</p>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <img src="img/goods3.jpg" alt="">
+                        <a href="#">
+                            <p>MORE →</p>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <img src="img/goods4.jpg" alt="">
+                        <a href="#">
+                            <p>MORE →</p>
+                        </a>
+                    </div>
+                </div><!-- .list end -->
+            </div><!-- .inner end -->
+        </section><!-- .Goods end -->
+
+        <div class="modal">
+            <div class="popup">
+                <h1>추석 연휴(9.28-10.03)</h1>
+                <p>당일배송</p>
+                <ul>
+                    <li>부산,울산,김해,진해,마산,창원,제주 : 9월 25일(월) 10시</li>
+                    <li>광주,원주,춘천,청주,경산,대전,아산,천안,대구,구미,포항 : 9월26일(화) 10시</li>
+                    <li>수도권 : 9월 26일(화) 12시</li>
+                </ul>
+                <button class="btn"><img src="img/icons/icons8-닫기-64.png" alt=""></button>
+            </div>
+        </div>
+
+        <section class="button_teb">
+            <div class="inner">
+                <div class="left">
+                    <h4>공지사항</h4>
+                    <ul>
+                        <li><a href="#">추석 연휴(9.28-10.03) 전 택배 회수, 지정편의점 위탁 원하시면</a></li>
+                        <li><a href="#">9월 신용카드 무이자 안내</a></li>
+                        <li><a href="#">[채용공고] AI Engineer</a></li>
+                    </ul>
+                </div>
+                <div class="search_box">
+                    <input type="text" placeholder="FAQ">
+                    <button>Search</button>
+                </div><!-- .search_box end -->
+                <div class="right">
+                    <div>
+                        <h4>빠른 서비스</h4>
+                        <ul>
+                            <li><a href="#">반품/교환</a></li>
+                            <li><a href="#">신청 증빙서류 신청</a></li>
+                            <li><a href="#">미배송 신고</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>출판사, 판매자 안내</h4>
+                        <ul>
+                            <li><a href="#">제휴 & 마케팅 안내</a></li>
+                            <li><a href="#">출판사/공급사 안내</a></li>
+                            <li><a href="#">광고 안내</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- .inner end -->
+        </section><!-- .button_teb end -->
+    </div><!-- #wrap end -->
+
+    <footer>
+        <div class="inner">
+            <div class="logo">
+                <img src="img/aladin_logo.png" alt="">
+            </div><!-- .logo end -->
+            <div class="text">
+                <div class="box_1">
+                    <ul class="footer_nav">
+                        <li><a href="#">회사소개</a></li>
+                        <li><a href="#">채용안내</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">청소년 보호정책</a></li>
+                    </ul>
+                    <span>(주)알라딘커뮤니케이션 </span>
+                    <ul class="buttom">
+                        <li>대표이사 최우경 고객정보보호 책임자 최우경 <br>사업자등록 201-81-23094 통신판매업신고 중구01520호</li>
+                        <li>이메일 privacy@aladin.co.kr <br>호스팅 제공자 알라딘커뮤니케이션 (본사) 서울시 중구 서소문로 89-31</li>
+                    </ul>
+                </div><!-- .box_1 end -->
+                <div class="box_2">
+                    <select name="footer_box">
+                        <option value="#">제휴·마케팅 안내</option>
+                        <option value="#">판매자 매니저</option>
+                        <option value="#">출판사·공급사 안내</option>
+                        <option value="#">광고 안내</option>
+                        <option value="#">학교·기업·기관 대량구매</option>
+                    </select>
+                    <ul>
+                        <li>고객센터 1544-2514 (발신자 부담)</li>
+                        <li>서울시 마포구 백범로 71 숨도빌딩 7층 Fax 02-6926-2600</li>
+                    </ul>
+                    <ul class="right_buttom">
+                        <li><a href="#">1 : 1 상담</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div><!-- .box_2 end -->
+            </div><!-- .text end -->
+
+            <p class="footer_copy">
+                ⓒ Aladin Communication. All Rights Reserved.
+            </p>
+        </div><!-- .inner end -->
+    </footer>
+</body>
+
+</html>
