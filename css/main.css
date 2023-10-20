@@ -156,10 +156,11 @@ h4 {
   object-fit: cover;
 }
 .Popular .inner .title a {
-  padding: 10px 20px;
-  background-color: #f21c8c;
+  padding: 7px 15px;
+  background-color: #e95ea6;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.8rem;
   color: #fff;
   position: absolute;
   top: -20px;
@@ -168,19 +169,34 @@ h4 {
 .Popular .inner .list {
   width: 59.05%;
 }
-.Popular .inner .list .item {
-  /* width: calc(100% / 3 - 28px); */
-  max-width: 190px;
-  width: 30.44%;
-}
-.Popular .inner .list .item > img {
+.Popular .inner .list .swiper-slide > img {
   width: 100%;
-  max-height: 285px;
-  height: 22.26vw;
-  object-fit: cover;
+  max-height: 280px;
+  height: 25vw;
 }
-.Popular .inner .list .item .box_buttom div {
-  width: 84.21%;
+.Popular .inner .list .swiper-slide .box_buttom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Popular .inner .list .swiper-slide .box_buttom div {
+  width: 80%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #404ea2;
+  color: #fff;
+}
+.Popular .inner .list .swiper-slide .box_buttom div:hover {
+  background-color: #333;
+  border-radius: 10px;
+  transition: 1s;
+}
+.Popular .inner .list .swiper-slide .box_buttom img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
 }
 /* 😊 */
 .Best .inner .title {
@@ -514,7 +530,7 @@ h4 {
 @media screen and (max-width: 1024px) {
   .inner .list .item {
     max-width: 221px;
-    width:21.58%;
+    width: 21.58%;
   }
   .inner .list .item:nth-child(4) ~ div {
     display: none;
@@ -540,11 +556,6 @@ h4 {
   .banner .slide .text {
     top: 40%;
   }
-  .Popular .inner .list .item > img {
-    max-height: 250px;
-    height: 19.53vh;
-    object-fit: cover;
-  }
 }
 @media screen and (max-width: 810px) {
   .inner .list .item img {
@@ -558,8 +569,8 @@ h4 {
   .inner .list .item .box_buttom > a img {
     display: none;
   }
-  .inner .list .item .box_top strong  {
-   flex-direction: column;
+  .inner .list .item .box_top strong {
+    flex-direction: column;
   }
   .inner .list .item .box_top p {
     margin-bottom: 20px;
@@ -567,14 +578,10 @@ h4 {
   .banner .slide .text {
     top: 30%;
   }
-  .Popular .inner .list .item .box_buttom div {
+  .Popular .inner .list .swiper-slide .box_buttom div {
     width: 100%;
   }
-  .Popular .inner .list .item > img {
-    max-height: 210px;
-    height: 25.95vw;
-  }
-  .Popular .inner .title a {
+  .Popular .inner .list .swiper-slide .box_buttom > a {
     display: none;
   }
 }
